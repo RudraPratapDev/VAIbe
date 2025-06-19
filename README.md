@@ -1,3 +1,9 @@
+<p align="center">
+  <img src="https://raw.githubusercontent.com/RudraPratapDev/VAIbe/main/public/logoA.svg" alt="VAIbe Logo" width="200" />
+  <br />
+  <em>the vibe is evolving.</em>
+</p>
+
 # VAIbe ✨  
 #### _More than just conversation._
 
