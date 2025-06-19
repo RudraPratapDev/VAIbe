@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 80" width="180" height="80">
+  <style>
+    .fade-slide-up {
+      animation: fadeUp 1s ease-out forwards;
+    }
+
+    .fade-slide-down {
+      animation: fadeDown 1s ease-out forwards;
+    }
+
+    .fade-scale {
+      animation: fadeScale 1.2s ease-out forwards;
+    }
+
+    @keyframes fadeUp {
+      0% { opacity: 0; transform: translateY(10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeDown {
+      0% { opacity: 0; transform: translateY(-10px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeScale {
+      0% { opacity: 0; transform: scale(0.9); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+  </style>
+
+  <!-- ▼ inverted triangle as V -->
+  <polygon points="10,30 20,53 30,30" fill="#FFFFFF" class="fade-slide-up" />
+
+  <!-- ▲ upright triangle as A -->
+  <polygon points="30,53 40,30 50,53" fill="#FFFFFF" class="fade-slide-down" />
+
+  <!-- "Ibe" text -->
+  <text x="55" y="55" font-size="40" font-family="Lexend, 'Segoe UI', sans-serif"
+        fill="#FFFFFF" font-weight="600" letter-spacing="1" class="fade-scale">
+    Ibe
+  </text>
+</svg>

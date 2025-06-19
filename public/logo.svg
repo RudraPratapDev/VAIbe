@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 80" width="140" height="80">
+  <!-- ▼ inverted triangle as V -->
+  <polygon points="10,30 20,53 30,30" fill="#16A34A" />
+
+  <!-- ▲ upright triangle as A -->
+  <polygon points="30,53 40,30 50,53" fill="#16A34A" />
+
+  <!-- "Ibe" text -->
+  <text x="55" y="55" font-size="40" font-family="Lexend, 'Segoe UI', sans-serif" fill="#16A34A" font-weight="600" letter-spacing="1">
+    Ibe
+  </text>
+</svg>
