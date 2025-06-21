@@ -12,8 +12,11 @@ import { Input } from "@/components/ui/input";
 import { Alert, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import {FaGithub,FaGoogle} from "react-icons/fa";
+
+
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 
 const formSchema=z.object({
@@ -28,9 +31,10 @@ const formSchema=z.object({
 
 export const SignUpView = () => {
 
-    const router=useRouter();
+
     const [error,setError]=useState(null);
     const [loading,setLoading]=useState(false);
+    const router=useRouter();
 
     const form=useForm<z.infer<typeof formSchema>>({
         resolver:zodResolver(formSchema),
@@ -39,6 +43,7 @@ export const SignUpView = () => {
             email:"",
             password:"",
             confirmPassword:"",
+            
         },
     });
 
@@ -50,11 +55,13 @@ export const SignUpView = () => {
                 name:data.name,
                 email:data.email,
                 password:data.password,
+                callbackURL:"/"
             },
             {
                 onSuccess:()=>{
-                    setLoading(false)
+                    setLoading(false);
                     router.push("/");
+                 
                 },
                 onError:(error)=>{
                     setLoading(false)
@@ -141,8 +148,22 @@ export const SignUpView = () => {
                             </span>
                         </div>
                         <div className="grid grid-cols-2 gap-4">
-                            <Button disabled={loading} variant="outline" type="button" className="w-full">Google</Button>
-                            <Button disabled={loading} variant="outline" type="button" className="w-full">GitHub</Button>
+                            <Button disabled={loading} onClick={()=>{
+                                authClient.signIn.social({
+                                    provider:"google",
+                                    callbackURL:"/"
+                                })
+                            }} variant="outline" type="button" className="w-full">
+                                <FaGoogle/>
+                                </Button>
+                            <Button disabled={loading} onClick={()=>{
+                                authClient.signIn.social({
+                                    provider:"github",
+                                    callbackURL:"/"
+                                })
+                            }} variant="outline" type="button" className="w-full">
+                                <FaGithub/>
+                                </Button>
                         </div>
                         <div className="text-center text-sm">
                             Already have an account?{" "}
