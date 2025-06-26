@@ -58,7 +58,7 @@ const DashboardUserButton = () => {
     Billing <CreditCardIcon className="size-4 text-white/60" />
   </DropdownMenuItem>
   <DropdownMenuItem onClick={onLogout} className="flex justify-between items-center px-2 py-2 text-sm text-white hover:bg-white/5 rounded-md transition hover:text-red-700">
-    LogOut <LogOutIcon className="size-4 text-white/60" />
+    LogOut <LogOutIcon className="size-4 " />
   </DropdownMenuItem>
 </DropdownMenuContent>
         </DropdownMenu>
