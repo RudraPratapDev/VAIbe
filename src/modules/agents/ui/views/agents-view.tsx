@@ -17,7 +17,7 @@ export const AgentsView = () => {
 
  
 
-  return <div className="min-h-screen flex-1 pb-4 px-4 md:px:8 flex flex-col gap-y-4">
+  return <div className="min-h-screen flex-1 pb-4 px-4 md:px-8 flex flex-col gap-y-4">
 
       <DataTable data={data} columns={columns}/>
       {data.length===0 && (
