@@ -2,6 +2,7 @@
 
 
 import { LoadingState } from "@/components/loading-state";
+
 import { useTRPC } from "@/trpc/client";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
@@ -11,7 +12,9 @@ export const AgentsView = () => {
     trpc.agents.getMany.queryOptions()
   );
 
-  return <div>{JSON.stringify(data, null, 2)}</div>;
+  return <div className="min-h-screen">
+      {JSON.stringify(data, null, 2)}
+    </div>;
 };
 export const AgentsViewLoading = () => {
   return (
