@@ -1,6 +1,6 @@
 
 import { db } from "@/db";
-import {  meetings } from "@/db/schema";
+import {   meetings } from "@/db/schema";
 import { createTRPCRouter, protectedProcedure } from "@/trpc/init";
 
 import { z } from "zod";
@@ -8,9 +8,31 @@ import { and, count, desc, eq, getTableColumns, ilike } from "drizzle-orm";
 import { DEFAULT_PAGE, DEFAULT_PAGE_SIZE, PAGE_MAX_SIZE, PAGE_MIN_SIZE } from "@/constants";
 
 import { TRPCError } from "@trpc/server";
+import { meetingsUpdateSchema,meetingsInsertSchema } from "../schemas";
 
 
 export const meetingsRouter=createTRPCRouter({
+
+    update:protectedProcedure.input(meetingsUpdateSchema).mutation(async({input,ctx})=>{
+                const [existingMeeting]=await db
+                .select()
+                .from(meetings)
+                .where(
+                    and(
+                        eq(meetings.id,input.id),
+                        eq(meetings.userId,ctx.auth.user.id)
+                    )
+                );
+
+                if(!existingMeeting) throw new TRPCError({ code: "NOT_FOUND", message: "Meeting not found" });
+
+                await db
+                .update(meetings)
+                .set({...input})
+                .where(eq(meetings.id,input.id));
+
+                return { success: true };
+            }),
 
 
     getMany:protectedProcedure
@@ -76,6 +98,19 @@ export const meetingsRouter=createTRPCRouter({
 
         return existingMeeting;
     }),
+
+    create:protectedProcedure
+        .input(meetingsInsertSchema)
+        .mutation(async({input,ctx})=>{
+            const [createdMeeting]=await db
+            .insert(meetings)
+            .values({...input,userId:ctx.auth.user.id})
+            .returning();
+
+            return createdMeeting;
+        }),
+
+        
 
    
 })

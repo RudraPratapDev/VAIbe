@@ -14,10 +14,10 @@ const MeetingsView = () => {
 
 
     return ( 
-        <div>
-            {JSON.stringify(data)}
+        <div className="">
+            TODO: Meetings List
         </div>
-     );
+     ); 
 }
  
 export default MeetingsView;
