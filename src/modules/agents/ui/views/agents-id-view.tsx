@@ -34,7 +34,7 @@ export const AgentIdView = ({ agentId }: Props) => {
           router.push("/agents");
         },
         onError: (error) => {
-          toast.error("Error removing agent");
+          toast.error("Error removing agent: " + error.message);
         }
       })
     )

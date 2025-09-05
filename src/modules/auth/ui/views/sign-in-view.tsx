@@ -26,7 +26,7 @@ const formSchema=z.object({
 export const SignInView = () => {
 
 
-    const [error,setError]=useState(null);
+    const [error,setError]=useState<string | null>(null);
     const [loading,setLoading]=useState(false);
     const router=useRouter();
 
@@ -55,7 +55,7 @@ export const SignInView = () => {
                 },
                 onError:(error)=>{
                     setLoading(false)
-                    setError(error.error.message)
+                    setError(error.error.message );
                 }
             }
         )
@@ -69,7 +69,7 @@ export const SignInView = () => {
         <CardContent className="grid p-0 md:grid-cols-2">
 
             <Form  {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="p-6 md:pd-8">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="p-6 md:p-8">
                     <div className="flex flex-col gap-6">
                         <div className="flex flex-col items-center text-center">
                             <h1 className="text-2xl font-bold">
@@ -126,9 +126,9 @@ export const SignInView = () => {
                                 </Button>
                             <Button disabled={loading} onClick={()=>{
                                 authClient.signIn.social({
-                                    provider:"github",
-                                    callbackURL:"/"
-                                })
+                                  provider: "github",
+                                  callbackURL: "/",
+                                });
                             }} variant="outline" type="button" className="w-full">
                                 <FaGithub/>
                                 </Button>
