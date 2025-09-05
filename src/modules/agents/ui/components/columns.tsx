@@ -10,7 +10,7 @@ import { AgentGetMany } from "../../types"
 
 
 
-export const columns: ColumnDef<AgentGetMany>[] = [
+export const columns: ColumnDef<AgentGetMany[number]>[] = [
   {
     accessorKey: "name",
     header: "Agent Name",

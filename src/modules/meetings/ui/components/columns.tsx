@@ -16,6 +16,7 @@ function formatDuration(seconds:number){
         units:["h","m","s"],
     });
 }
+
 const statusIconMap={
     upcoming:ClockArrowUpIcon,
     active:LoaderIcon,
@@ -37,25 +38,26 @@ export const columns: ColumnDef<MeetingGetMany[number]>[] = [
     accessorKey: "name",
     header: "Meeting Name",
     cell:({row})=>(
-        <div className="flex flex-col gap-y-1">
-            <span className="font-semibold capitalize">{row.original.name}</span>
+        <div className="flex flex-col gap-y-2">
+            <div className="flex items-center gap-x-3">
+                <span className="font-semibold text-sm text-foreground leading-tight">{row.original.name}</span>
+                {row.original.startedAt && (
+                    <span className="text-xs text-muted-foreground bg-muted/50 px-2 py-0.5 rounded-md">
+                        {format(row.original.startedAt, "MMM d")}
+                    </span>
+                )}
+            </div>
             
-            <div className="flex items-center gap-x-2 ">
-                <div className="flex items-center gap-x-1">
-                        <CornerDownRightIcon  className="size-3 text-muted-foreground"/>
-                        <span className="text-sm text-muted-foreground max-w-[200px] truncate capitalize">
-                            {row.original.agent.name} 
-                        </span>
-                </div>
-
+            <div className="flex items-center gap-x-2">
+                <CornerDownRightIcon className="size-3 text-muted-foreground flex-shrink-0" />
                 <GeneratedAvatar 
                     variant="botttsNeutral"
                     seed={row.original.agent.name}
-                    classname="size-4"
+                    classname="size-4 flex-shrink-0"
                 />
-                <span className="text-sm text-muted-foreground">{row.original.startedAt?format(row.original.startedAt,"MMM d"):""}</span>
-
-
+                <span className="text-xs text-muted-foreground truncate max-w-[150px] capitalize">
+                    {row.original.agent.name}
+                </span>
             </div>
         </div>
     )
@@ -67,22 +69,23 @@ export const columns: ColumnDef<MeetingGetMany[number]>[] = [
         const Icon=statusIconMap[row.original.status as keyof typeof statusIconMap];
         const color=statusColorMap[row.original.status as keyof typeof statusColorMap];
         return(
-            <Badge variant="outline" className={`flex items-center gap-x-2 ${color} [&svg]:size-4`}>
-                {Icon && <Icon className={cn(row.original.status==="processing" && "animate-spin")} />}
-                {row.original.status}
+            <Badge variant="outline" className={cn("flex items-center gap-x-1.5 text-xs", color)}>
+                {Icon && <Icon className={cn("size-3", row.original.status==="processing" && "animate-spin")} />}
+                <span className="capitalize">{row.original.status}</span>
             </Badge>
         )
     }
-  },{
+  },
+  {
     accessorKey:"duration",
     header:"Duration",
     cell:({row})=>{
         return(
-           <Badge variant="outline" className="flex items-center gap-x-2 [&svg]:size-4">
-               <ClockFadingIcon className="text-blue-700" />
-               {row.original.duration?formatDuration(row.original.duration):"N/A"}
+           <Badge variant="outline" className="flex items-center gap-x-1.5 text-xs">
+               <ClockFadingIcon className="size-3 text-blue-700" />
+               <span>{row.original.duration ? formatDuration(row.original.duration) : "N/A"}</span>
            </Badge>
         )
     }
-}
+  }
 ]

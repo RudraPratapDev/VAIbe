@@ -11,7 +11,7 @@ interface GeneratedAvatarProps{
 
 }
 
-export const GeneratedAvatar=({seed,className,variant}:GeneratedAvatarProps)=>{
+export const GeneratedAvatar=({seed,classname,variant}:GeneratedAvatarProps)=>{
     let avatar;
     if(variant==="botttsNeutral"){
         avatar=createAvatar(botttsNeutral,{
@@ -25,7 +25,7 @@ export const GeneratedAvatar=({seed,className,variant}:GeneratedAvatarProps)=>{
         })
     }
     return (
-        <Avatar className={cn(className)}>
+        <Avatar className={cn(classname)}>
             <AvatarImage  src={avatar.toDataUri()} alt="avatar"/>
             <AvatarFallback>
                 {seed.charAt(0).toUpperCase()}

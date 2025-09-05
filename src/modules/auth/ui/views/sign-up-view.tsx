@@ -32,7 +32,7 @@ const formSchema=z.object({
 export const SignUpView = () => {
 
 
-    const [error,setError]=useState(null);
+    const [error,setError]=useState<string | null>(null);
     const [loading,setLoading]=useState(false);
     const router=useRouter();
 
@@ -65,7 +65,7 @@ export const SignUpView = () => {
                 },
                 onError:(error)=>{
                     setLoading(false)
-                    setError(error.error.message)
+                    setError(error.error.message);
                 }
             }
         )
